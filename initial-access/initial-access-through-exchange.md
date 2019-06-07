@@ -8,7 +8,7 @@
 
 ## Introduction
 
-Ruler is a tool that allows you to interact with Exchange servers remotely, through either the MAPI/HTTP or RPC/HTTP protocol. The main aim isto  abuse the client-side Outlook features and gain a shell remotely.
+Ruler is a tool that allows you to interact with Exchange servers remotely, through either the MAPI/HTTP or RPC/HTTP protocol. The main aim isto abuse the client-side Outlook features and gain a shell remotely.
 
 Ruler attempts to interact with Exchange and uses the Autodiscover service \(just like in your organization\) to discover the relevant information needed to proceed.
 

@@ -26,7 +26,7 @@ The general approach to going from external network access to domain admin consi
 * MSSQL \(1433\)
 * RDS \(3389\)
 * RDWEB \(3389, navigate to [http://ip/rdweb](http://ip/rdweb)\)
-* OWA \(80, navigate to subdomain email.domain.com or http://ip/owa\)
+* OWA \(80, navigate to subdomain email.domain.com or [http://ip/owa\](http://ip/owa\)\)
 
 **Tools**
 

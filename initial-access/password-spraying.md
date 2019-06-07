@@ -25,7 +25,7 @@ The technique has certain requirements that must be fulfilled for it to work. It
 
 External password spraying is when we perform the attack from outside a domain. Most enterprises provide their employees a way of accessing e-mail from the internet. Therefore, most organizations have a portal for Outlook Web App \(OWA\). It usually looks something like this:
 
-![](../.gitbook/assets/image%20%2829%29.png)
+![](../.gitbook/assets/image-29.png)
 
 That means if we can figure out the syntax we can attempt to authenticate with common passwords. However, when spraying passwords beware of lockout tresholds. Many enterprises have a lockout policy after five or ten attempts, but some have lockouts as low as three attemps. There is also usually a treshold for this lockout set around 30 minutes. But mind you, that these are all educated guesses and may vary. So always err on the side of caution when password spraying.
 
@@ -65,13 +65,14 @@ We got the domain name, now let's try to enumerate ourselves to a username. If w
 
 Let's assume for the sake of example we have gotten an e-mail address through LinkedIn, which is not far fetched at all. Side note: check out [theHarvester](https://github.com/laramies/theHarvester). Let's say we find an employee for this organization on LinkedIn. His name is `Bill Long Money` and his e-mail is`bill.money@testlab.biz`
 
-Now there are a number of possible syntaxes for domain users, but most follow one of a few common schemes. Let's apply them to our friend:  
-- First letter of first name + entire last name = `bmoney`  
-- First letter of first and last name \(could also include middle names\) = `bm`  or  `blm`  
-- Prefix \(a character usually\) + first letter of first name + entire last name =  `a-bmoney`  
-- Full name = `billmoney` \(less common I believe\)
+Now there are a number of possible syntaxes for domain users, but most follow one of a few common schemes. Let's apply them to our friend:
 
-We can try the different schemes with a domain name. Usually the owa\_login module is able to verify the validity of accounts without a correct password.  Let's try a spray with a randomly guessed password with `bmoney` as username.
+* First letter of first name + entire last name = `bmoney`  
+* First letter of first and last name \(could also include middle names\) = `bm`  or  `blm`  
+* Prefix \(a character usually\) + first letter of first name + entire last name =  `a-bmoney`  
+* Full name = `billmoney` \(less common I believe\)
+
+We can try the different schemes with a domain name. Usually the owa\_login module is able to verify the validity of accounts without a correct password. Let's try a spray with a randomly guessed password with `bmoney` as username.
 
 ```text
 use auxiliary/scanner/http/owa_login

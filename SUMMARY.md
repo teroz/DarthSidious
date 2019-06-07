@@ -55,6 +55,7 @@
   * [lkylabs v1](other/writeups/lkylabs-v1.md)
 * [War stories](other/war-stories/README.md)
   * [Domain admin in 30 minutes](other/war-stories/domain-admin-in-30-minutes.md)
+  * [Anatomy of a Bank Hack](other/war-stories/anatomy-of-a-bank-hack.md)
 
 ## Credential access
 

@@ -29,8 +29,6 @@ Azure is by default open to every user in the organization. That means clients w
 
 A little code block with some common procedures for enumerating Azure AD.
 
-
-
 ```text
 ### Azure AD enumeration
 
@@ -71,7 +69,7 @@ az ad user list --output=json --query='[].{Created:createdDateTime,UPN:userPrinc
 #PS script to get array of users / roles
 $roleUsers = @() 
 $roles=Get-AzureADDirectoryRole
- 
+
 ForEach($role in $roles) {
   $users=Get-AzureADDirectoryRoleMember -ObjectId $role.ObjectId
   ForEach($user in $users) {
