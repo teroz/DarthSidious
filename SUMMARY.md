@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Darth Sidious](README.md)
+* [Hacking Windows Networks](README.md)
 
 ## GETTING STARTED
 
